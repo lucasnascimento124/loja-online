@@ -1,0 +1,654 @@
+<html><head><base href="https://websim.ai/get-started%20faltou%20o%20carrinho%20e%20a%20forma%20de%20pagamento%20e%20entregamos%20para%20todo%20podemos%20faxer%20para%20quando%20o%20cliente%20escolher%20um%20modelo%20aparecer%20o%20tenes%20em%20tela%20cheia%20e%20varios%20modelos%20parecido#products%20eu%20mesmo%20gostaria%20de%20por%20meus%20produtos%20mais%20so%20no%20codigo%20nao%20assim%20a%20vista%20do%20cliente">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUCAS ONE TENIS - Catálogo de Produtos</title>
+<style>
+  :root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --accent-color: #e74c3c;
+    --background-color: #f4f4f4;
+    --text-color: #333;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #3498db;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+
+  header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+  }
+
+  .nav-links li {
+    margin-left: 1.5rem;
+  }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--secondary-color);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 6rem auto 2rem;
+    padding: 0 2rem;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .product {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .product:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .product img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .product-info {
+    padding: 1rem;
+  }
+
+  .product-title {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .product-price {
+    font-weight: bold;
+    color: var(--accent-color);
+  }
+
+  .product-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+  }
+
+  #cart-icon {
+    position: relative;
+    cursor: pointer;
+  }
+
+  #cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 1000px;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .product-modal-image {
+    width: 100%;
+    max-width: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex: 1;
+  }
+
+  .product-modal-info {
+    flex: 1;
+    padding: 0 20px;
+  }
+
+  .similar-products {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 20px;
+  }
+
+  .similar-product {
+    text-align: center;
+  }
+
+  .similar-product img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+  }
+
+  .similar-product img:hover {
+    transform: scale(1.1);
+  }
+
+  #payment-methods {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .payment-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+  }
+
+  #delivery-info {
+    text-align: center;
+    margin-top: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+
+  .add-to-cart-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+  }
+
+  .add-to-cart-btn:hover {
+    background-color: #27ae60;
+  }
+
+  #cart-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+  }
+
+  .cart-modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 10px;
+  }
+
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .cart-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .cart-item-remove {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  #cart-total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: right;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+
+    .product-modal-image,
+    .product-modal-info {
+      flex: 100%;
+    }
+
+    .product-modal-info {
+      padding: 20px 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo" id="logo">LUCAS ONE TENIS</div>
+      <ul class="nav-links">
+        <li><a href="#home">Início</a></li>
+        <li><a href="#products">Produtos</a></li>
+        <li><a href="#about">Sobre</a></li>
+        <li><a href="#contact">Contato</a></li>
+      </ul>
+      <div id="cart-icon">
+        🛒
+        <span id="cart-count">0</span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="products">
+      <div class="product-grid">
+        <!-- Os produtos serão adicionados dinamicamente aqui -->
+      </div>
+    </section>
+
+    <div id="payment-methods">
+      <img src="https://cdn-icons-png.flaticon.com/128/196/196578.png" alt="Visa" class="payment-icon">
+      <img src="https://cdn-icons-png.flaticon.com/128/196/196561.png" alt="MasterCard" class="payment-icon">
+      <img src="https://cdn-icons-png.flaticon.com/128/196/196565.png" alt="PayPal" class="payment-icon">
+      <img src="https://cdn-icons-png.flaticon.com/128/5968/5968220.png" alt="Pix" class="payment-icon">
+    </div>
+
+    <div id="delivery-info">
+      Entregamos para todo o Brasil! 🚚🇧🇷
+    </div>
+  </main>
+
+  <div id="product-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img id="modal-product-image" src="" alt="" class="product-modal-image">
+      <div class="product-modal-info">
+        <h2 id="modal-product-title"></h2>
+        <p id="modal-product-price"></p>
+        <p id="modal-product-description"></p>
+        <button class="add-to-cart-btn">Adicionar ao Carrinho</button>
+      </div>
+      <div class="similar-products">
+        <!-- Produtos similares serão adicionados dinamicamente via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <div id="cart-modal" class="modal">
+    <div class="cart-modal-content">
+      <span class="close">&times;</span>
+      <h2>Seu Carrinho</h2>
+      <div id="cart-items"></div>
+      <div id="cart-total"></div>
+      <button id="checkout-btn" class="add-to-cart-btn">Finalizar Compra</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script>
+    // Array de produtos (você pode adicionar seus próprios produtos aqui)
+    const products = [
+      {
+        id: 1,
+        title: "Tênis de Corrida Veloz",
+        price: 299.99,
+        description: "Tênis leve e confortável, ideal para corridas de longa distância.",
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+      },
+      {
+        id: 2,
+        title: "Tênis Casual Estiloso",
+        price: 199.99,
+        description: "Tênis casual perfeito para o dia a dia, combina com diversos looks.",
+        image: "https://images.unsplash.com/photo-1549298916-b41d501d3772"
+      },
+      {
+        id: 3,
+        title: "Tênis Esportivo Multi-função",
+        price: 249.99,
+        description: "Tênis versátil para diversas atividades esportivas e uso diário.",
+        image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2"
+      },
+      {
+        id: 4,
+        title: "Tênis de Basquete Pro",
+        price: 349.99,
+        description: "Tênis de alto desempenho para jogadores de basquete profissionais e amadores.",
+        image: "https://images.unsplash.com/photo-1579338559194-a162d19bf842"
+      },
+      {
+        id: 5,
+        title: "Tênis de Caminhada Trail",
+        price: 279.99,
+        description: "Tênis resistente e confortável para trilhas e caminhadas em terrenos diversos.",
+        image: "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2"
+      },
+      {
+        id: 6,
+        title: "Tênis Minimalista",
+        price: 159.99,
+        description: "Tênis leve e flexível para uma experiência de corrida mais natural.",
+        image: "https://images.unsplash.com/photo-1539185441755-769473a23570"
+      },
+      {
+        id: 6,
+        title: "Tênis Minimalista",
+        price: 159.99,
+        description: "Tênis leve e flexível para uma experiência de corrida mais natural.",
+        image: "https://images.unsplash.com/photo-1539185441755-769473a23570"
+      },
+      {
+        id: 6,
+        title: "Tênis Minimalista",
+        price: 159.99,
+        description: "Tênis leve e flexível para uma experiência de corrida mais natural.",
+        image: "https://images.unsplash.com/photo-1539185441755-769473a23570"
+      },
+      {
+        id: 6,
+        title: "Tênis Minimalista",
+        price: 159.99,
+        description: "Tênis leve e flexível para uma experiência de corrida mais natural.",
+        image: "https://images.unsplash.com/photo-1539185441755-769473a23570"
+      },
+      {
+        id: 6,
+        title: "Tênis Minimalista",
+        price: 159.99,
+        description: "Tênis leve e flexível para uma experiência de corrida mais natural.",
+        image: "https://images.unsplash.com/photo-1539185441755-769473a23570"
+      },
+      {
+        id: 6,
+        title: "Tênis Minimalista",
+        price: 159.99,
+        description: "Tênis leve e flexível para uma experiência de corrida mais natural.",
+        image: "https://images.unsplash.com/photo-1539185441755-769473a23570"
+      },
+
+    ];
+
+    const productGrid = document.querySelector('.product-grid');
+    const modal = document.getElementById('product-modal');
+    const modalImage = document.getElementById('modal-product-image');
+    const modalTitle = document.getElementById('modal-product-title');
+    const modalPrice = document.getElementById('modal-product-price');
+    const modalDescription = document.getElementById('modal-product-description');
+    const closeBtns = document.getElementsByClassName('close');
+    const cartCount = document.getElementById('cart-count');
+    const cartIcon = document.getElementById('cart-icon');
+    const cartModal = document.getElementById('cart-modal');
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    let cart = [];
+
+    function displayProducts() {
+      productGrid.innerHTML = '';
+      products.forEach((product, index) => {
+        const productElement = document.createElement('div');
+        productElement.classList.add('product');
+        productElement.innerHTML = `
+          <img src="${product.image}" alt="${product.title}">
+          <div class="product-info">
+            <h3 class="product-title">${product.title}</h3>
+            <p class="product-price">R$ ${product.price.toFixed(2)}</p>
+            <p class="product-description">${product.description}</p>
+          </div>
+        `;
+        productElement.addEventListener('click', () => showProductModal(index));
+        productGrid.appendChild(productElement);
+      });
+    }
+
+    function showProductModal(index) {
+      const product = products[index];
+      modalImage.src = product.image;
+      modalTitle.textContent = product.title;
+      modalPrice.textContent = `R$ ${product.price.toFixed(2)}`;
+      modalDescription.textContent = product.description;
+
+      // Gerar produtos similares
+      const similarProducts = document.querySelector('.similar-products');
+      similarProducts.innerHTML = '';
+      const similarProductsData = products
+        .filter(p => p !== product)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 4);
+
+      similarProductsData.forEach(similarProduct => {
+        const similarProductElement = document.createElement('div');
+        similarProductElement.classList.add('similar-product');
+        similarProductElement.innerHTML = `
+          <img src="${similarProduct.image}" alt="${similarProduct.title}">
+          <p>${similarProduct.title}</p>
+        `;
+        similarProducts.appendChild(similarProductElement);
+      });
+
+      modal.style.display = 'block';
+    }
+
+    Array.from(closeBtns).forEach(btn => {
+      btn.onclick = () => {
+        modal.style.display = 'none';
+        cartModal.style.display = 'none';
+      };
+    });
+
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+      if (event.target == cartModal) {
+        cartModal.style.display = 'none';
+      }
+    };
+
+    document.querySelector('.add-to-cart-btn').onclick = () => {
+      const product = {
+        title: modalTitle.textContent,
+        price: parseFloat(modalPrice.textContent.replace('R$ ', '')),
+        image: modalImage.src
+      };
+      cart.push(product);
+      updateCartCount();
+      modal.style.display = 'none';
+    };
+
+    cartIcon.onclick = () => {
+      updateCartModal();
+      cartModal.style.display = 'block';
+    };
+
+    function updateCartCount() {
+      cartCount.textContent = cart.length;
+    }
+
+    function updateCartModal() {
+      cartItems.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, index) => {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+          <img src="${item.image}" alt="${item.title}" class="cart-item-image">
+          <div>
+            <h3>${item.title}</h3>
+            <p>R$ ${item.price.toFixed(2)}</p>
+          </div>
+          <button class="cart-item-remove" data-index="${index}">Remover</button>
+        `;
+        cartItems.appendChild(cartItem);
+        total += item.price;
+      });
+      cartTotal.textContent = `Total: R$ ${total.toFixed(2)}`;
+
+      const removeButtons = document.querySelectorAll('.cart-item-remove');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          const index = parseInt(e.target.getAttribute('data-index'));
+          cart.splice(index, 1);
+          updateCartCount();
+          updateCartModal();
+        });
+      });
+    }
+
+    checkoutBtn.onclick = () => {
+      alert('Obrigado por sua compra! Em breve você receberá mais informações por e-mail.');
+      cart = [];
+      updateCartCount();
+      cartModal.style.display = 'none';
+    };
+
+    function animateProducts() {
+      gsap.from('.product', {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        stagger: 0.1,
+        ease: 'back.out(1.7)'
+      });
+    }
+
+    gsap.from('.payment-icon', {
+      opacity: 0,
+      y: 20,
+      duration: 1,
+      delay: 1,
+      stagger: 0.2,
+      ease: 'back.out(1.7)'
+    });
+
+    gsap.from('#delivery-info', {
+      opacity: 0,
+      y: 20,
+      duration: 1,
+      delay: 1.5,
+      ease: 'back.out(1.7)'
+    });
+
+    // Animação inicial
+    animateProducts();
+
+    // Voltar para a tela inicial
+    document.querySelector('.logo').addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Scroll suave para as seções
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Inicializar a exibição de produtos
+    displayProducts();
+  </script>
+</body>
+</html>
